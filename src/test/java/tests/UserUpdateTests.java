@@ -40,8 +40,8 @@ public class UserUpdateTests extends BaseTest {
     }
 
     @Test
-    @DisplayName("Изменение  данных пользователя с авторизацией")
-    @Description("Ожидаем  200 OK и success=true при изменении имени авторизованного пользователя")
+    @DisplayName("Изменение данных пользователя с авторизацией")
+    @Description("Ожидаем 200 OK и success=true при изменении имени авторизованного пользователя")
     public void updateUserWithAuth() {
         User updated = new User(email, password, "NewName");
 
