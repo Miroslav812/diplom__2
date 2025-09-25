@@ -52,7 +52,7 @@ public class OrderCreationTests extends BaseTest {
     }
 
     @Test
-    @DisplayName("Создание заказа с авторизацией и ингредиентами")
+    @DisplayName("Создание  заказа с авторизацией и ингредиентами")
     @Description("Ожидаем 200 OK, success=true и возврат номера заказа")
     public void createOrderWithAuth() {
         Order order = new Order(ingredients.subList(0, 2));

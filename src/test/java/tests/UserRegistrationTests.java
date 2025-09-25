@@ -50,7 +50,7 @@ public class UserRegistrationTests extends BaseTest {
     }
 
     @Test
-    @DisplayName("Создание уже зарегистрированного пользователя")
+    @DisplayName("Создание  уже зарегистрированного пользователя")
     @Description("Ожидаем 403 при повторной регистрации с теми же данными")
     public void createExistingUser() {
         // регистрируем первого

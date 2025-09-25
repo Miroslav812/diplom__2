@@ -42,7 +42,7 @@ public class UserOrdersTests extends BaseTest {
 
     @Test
     @DisplayName("Получение заказов авторизованным пользователем")
-    @Description("Ожидаем 200 OK, success=true и список заказов")
+    @Description("Ожидаем  200 OK, success=true и список заказов")
     public void getOrdersWithAuth() {
         Response response = orderClient.getUserOrders(accessToken);
 
