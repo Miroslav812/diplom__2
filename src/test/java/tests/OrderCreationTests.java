@@ -52,8 +52,8 @@ public class OrderCreationTests extends BaseTest {
     }
 
     @Test
-    @DisplayName("Создание заказа с авторизацией и ингредиентами")
-    @Description("Ожидаем 200 OK, success=true и возврат номера заказа")
+    @DisplayName("Создание  заказа с авторизацией и ингредиентами")
+    @Description("Ожидаем  200 OK, success=true и возврат номера заказа")
     public void createOrderWithAuth() {
         Order order = new Order(ingredients.subList(0, 2));
 
@@ -66,7 +66,7 @@ public class OrderCreationTests extends BaseTest {
     }
 
     @Test
-    @DisplayName("Создание заказа без авторизации")
+    @DisplayName("Создание  заказа без авторизации")
     @Description("Заказ создаётся даже без токена — success=true, но заказ не привязан к пользователю")
     public void createOrderWithoutAuth() {
         Order order = new Order(ingredients.subList(0, 2));

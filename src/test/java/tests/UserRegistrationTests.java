@@ -36,7 +36,7 @@ public class UserRegistrationTests extends BaseTest {
     }
 
     @Test
-    @DisplayName("Создание уникального пользователя")
+    @DisplayName("Создание  уникального пользователя")
     @Description("Проверка успешной регистрации нового юзера")
     public void createUniqueUser() {
         Response response = userClient.createUser(new User(email, password, name));

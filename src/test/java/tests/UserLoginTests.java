@@ -41,7 +41,7 @@ public class UserLoginTests extends BaseTest {
     }
 
     @Test
-    @DisplayName("Успешный логин под существующим пользователем")
+    @DisplayName("Успешный  логин под существующим пользователем")
     @Description("Ожидаем 200 OK, success=true и возвращаемый accessToken")
     public void loginExistingUser() {
         Response response = userClient.loginUser(new UserCredentials(email, password));
