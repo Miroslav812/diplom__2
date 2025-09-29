@@ -1,21 +1,26 @@
 package tests;
 
 import clients.UserClient;
-import io.qameta.allure.Description;
-import io.qameta.allure.junit4.DisplayName;
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import models.User;
 import models.UserCredentials;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
+@RunWith(JUnit4.class)
+@Epic("Stellar Burgers API")
+@Feature("Авторизация пользователя")
 public class UserLoginTests extends BaseTest {
+
     private UserClient userClient;
     private String accessToken;
     private String email;
@@ -27,7 +32,7 @@ public class UserLoginTests extends BaseTest {
         userClient = new UserClient();
         email = "login_" + UUID.randomUUID() + "@example.com";
 
-        // создаём пользователя для тестов
+        // создаём пользователя
         Response response = userClient.createUser(new User(email, password, name));
         accessToken = response.jsonPath().getString("accessToken");
     }
@@ -41,8 +46,8 @@ public class UserLoginTests extends BaseTest {
     }
 
     @Test
-    @DisplayName("Успешный логин под существующим пользователем")
-    @Description("Ожидаем 200 OK, success=true и возвращаемый accessToken")
+    @Story("Успешная авторизация")
+    @Description("Ожидаем 200 OK, success=true и получение accessToken")
     public void loginExistingUser() {
         Response response = userClient.loginUser(new UserCredentials(email, password));
 
@@ -53,7 +58,7 @@ public class UserLoginTests extends BaseTest {
     }
 
     @Test
-    @DisplayName("Логин  с неверным паролем")
+    @Story("Авторизация с некорректными данными")
     @Description("Ожидаем 401 Unauthorized и сообщение 'email or password are incorrect'")
     public void loginWithWrongPassword() {
         Response response = userClient.loginUser(new UserCredentials(email, "wrongPass"));
@@ -63,6 +68,6 @@ public class UserLoginTests extends BaseTest {
                 .body("success", equalTo(false))
                 .body("message", equalTo("email or password are incorrect"));
 
-        // accessToken здесь не получаем → tearDown ничего не удаляет
+        // accessToken здесь не получаем, tearDown не сработает
     }
 }

@@ -1,20 +1,25 @@
 package tests;
 
 import clients.UserClient;
-import io.qameta.allure.Description;
-import io.qameta.allure.junit4.DisplayName;
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import models.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
+@RunWith(JUnit4.class)
+@Epic("Stellar Burgers API")
+@Feature("Регистрация пользователя")
 public class UserRegistrationTests extends BaseTest {
+
     private UserClient userClient;
     private String accessToken;
     private String email;
@@ -36,8 +41,8 @@ public class UserRegistrationTests extends BaseTest {
     }
 
     @Test
-    @DisplayName("Создание уникального пользователя")
-    @Description("Проверка успешной регистрации нового юзера")
+    @Story("Успешная регистрация")
+    @Description("Ожидаем 200 OK, success=true и возврат accessToken")
     public void createUniqueUser() {
         Response response = userClient.createUser(new User(email, password, name));
 
@@ -50,10 +55,10 @@ public class UserRegistrationTests extends BaseTest {
     }
 
     @Test
-    @DisplayName("Создание  уже зарегистрированного пользователя")
-    @Description("Ожидаем 403 при повторной регистрации с теми же данными")
+    @Story("Регистрация с уже существующими данными")
+    @Description("Ожидаем 403 Forbidden и сообщение 'User already exists'")
     public void createExistingUser() {
-        // регистрируем первого
+        // первая регистрация
         Response firstResponse = userClient.createUser(new User(email, password, name));
         accessToken = firstResponse.jsonPath().getString("accessToken");
 
@@ -62,12 +67,13 @@ public class UserRegistrationTests extends BaseTest {
 
         secondResponse.then()
                 .statusCode(403)
+                .body("success", equalTo(false))
                 .body("message", equalTo("User already exists"));
     }
 
     @Test
-    @DisplayName("Создание пользователя без email")
-    @Description("Ожидаем 403 и ошибку обязательных полей")
+    @Story("Регистрация без обязательных полей")
+    @Description("Ожидаем 403 Forbidden и сообщение 'Email, password and name are required fields'")
     public void createUserWithoutEmail() {
         User user = new User(null, password, name);
 
@@ -75,7 +81,8 @@ public class UserRegistrationTests extends BaseTest {
 
         response.then()
                 .statusCode(403)
+                .body("success", equalTo(false))
                 .body("message", equalTo("Email, password and name are required fields"));
-        // accessToken не сохраняем — tearDown ничего не удаляет
+        // accessToken здесь не сохраняем → tearDown не вызовет удаление
     }
 }

@@ -1,20 +1,25 @@
 package tests;
 
 import clients.UserClient;
-import io.qameta.allure.Description;
-import io.qameta.allure.junit4.DisplayName;
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import models.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
+@RunWith(JUnit4.class)
+@Epic("Stellar Burgers API")
+@Feature("Обновление данных пользователя")
 public class UserUpdateTests extends BaseTest {
+
     private UserClient userClient;
     private String accessToken;
     private String email;
@@ -40,8 +45,8 @@ public class UserUpdateTests extends BaseTest {
     }
 
     @Test
-    @DisplayName("Изменение  данных пользователя с авторизацией")
-    @Description("Ожидаем 200 OK и success=true при изменении имени авторизованного пользователя")
+    @Story("Обновление данных с авторизацией")
+    @Description("Ожидаем 200 OK, success=true и обновлённое имя пользователя")
     public void updateUserWithAuth() {
         User updated = new User(email, password, "NewName");
 
@@ -55,7 +60,7 @@ public class UserUpdateTests extends BaseTest {
     }
 
     @Test
-    @DisplayName("Изменение данных пользователя без авторизации")
+    @Story("Обновление данных без авторизации")
     @Description("Ожидаем 401 Unauthorized и сообщение 'You should be authorised'")
     public void updateUserWithoutAuth() {
         User updated = new User(email, password, "NoAuth");
