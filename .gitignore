@@ -36,3 +36,26 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# Allure результаты
+target/allure-results/
+target/allure-report/
+allure-results/
+allure-report/
+
+# Maven
+target/
+*.jar
+*.war
+*.ear
+
+# Идея
+.idea/
+*.iml
+
+# Логи
+*.log
+
+# Системные файлы
+.DS_Store
+Thumbs.db

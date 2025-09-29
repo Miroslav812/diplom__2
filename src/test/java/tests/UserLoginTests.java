@@ -58,7 +58,7 @@ public class UserLoginTests extends BaseTest {
     }
 
     @Test
-    @Story("Авторизация с некорректными данными")
+    @Story("Авторизация  с некорректными данными")
     @Description("Ожидаем 401 Unauthorized и сообщение 'email or password are incorrect'")
     public void loginWithWrongPassword() {
         Response response = userClient.loginUser(new UserCredentials(email, "wrongPass"));

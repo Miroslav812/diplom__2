@@ -100,7 +100,7 @@ public class OrderCreationTests extends BaseTest {
     }
 
     @Test
-    @Story("Создание заказа с некорректными данными")
+    @Story("Создание  заказа с некорректными данными")
     @Description("Ожидаем 500 Internal Server Error при некорректном id ингредиента")
     public void createOrderWithInvalidIngredient() {
         Order order = new Order(Arrays.asList("invalid_ingredient"));

@@ -60,7 +60,7 @@ public class UserUpdateTests extends BaseTest {
     }
 
     @Test
-    @Story("Обновление данных без авторизации")
+    @Story("Обновление  данных без авторизации")
     @Description("Ожидаем 401 Unauthorized и сообщение 'You should be authorised'")
     public void updateUserWithoutAuth() {
         User updated = new User(email, password, "NoAuth");
