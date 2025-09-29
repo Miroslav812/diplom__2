@@ -72,7 +72,7 @@ public class UserRegistrationTests extends BaseTest {
     }
 
     @Test
-    @Story("Регистрация без обязательных полей")
+    @Story("Регистрация  без обязательных полей")
     @Description("Ожидаем 403 Forbidden и сообщение 'Email, password and name are required fields'")
     public void createUserWithoutEmail() {
         User user = new User(null, password, name);

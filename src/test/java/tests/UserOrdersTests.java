@@ -58,7 +58,7 @@ public class UserOrdersTests extends BaseTest {
     }
 
     @Test
-    @Story("Получение заказов без авторизации")
+    @Story("Получение  заказов без авторизации")
     @Description("Ожидаем 401 Unauthorized и сообщение 'You should be authorised'")
     public void getOrdersWithoutAuth() {
         Response response = orderClient.getOrdersWithoutAuth();
